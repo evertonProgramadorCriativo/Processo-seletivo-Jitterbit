@@ -10,6 +10,8 @@ const {
   jsonErrorHandler 
 } = require('./middlewares/errorHandler');
 
+const swaggerSetup = require('./config/swagger');
+
 // Importar rotas
 const pedidoRoutes = require('./routes/pedidoRoutes');
 
@@ -54,7 +56,7 @@ app.get('/', (req, res) => {
       atualizar_pedido: 'PUT /order/:orderId',
       deletar_pedido: 'DELETE /order/:orderId'
     },
-    documentation: 'https://github.com/evertonProgramadorCriativo/Processo-seletivo-Jitterbit'
+    documentation: '/api-docs'
   });
 });
 
@@ -82,6 +84,21 @@ app.get('/health', async (req, res) => {
   }
 });
 
+/**
+ * ROTA DE DOCUMENTAÇÃO SWAGGER
+ * GET /api-docs
+ * Documentação interativa da API
+ */
+
+app.use(
+  '/api-docs', 
+  swaggerSetup.swaggerUi.serve, 
+  swaggerSetup.swaggerUi.setup(swaggerSetup.swaggerDocs, {
+    customCss: swaggerSetup.customCss,
+    customSiteTitle: swaggerSetup.customSiteTitle,
+    customfavIcon: swaggerSetup.customfavIcon
+  })
+);
 /**
  * ROTAS DA API
  * Base URL: /order
