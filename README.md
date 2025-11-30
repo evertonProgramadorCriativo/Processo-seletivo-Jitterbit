@@ -191,3 +191,83 @@ Resposta JSON:
 OK ---+-  errorHandler funcionando
 
 Testes do Error Handler concluídos!
+
+
+## 5 Criar Pedido no Banco de Dados
+
+
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node models/pedidoModel.js    
+Testando Model - Criar Pedido...
+
+Teste 1: Criar pedido no banco
+Dados do pedido:
+{
+  "orderId": "v10089016vdb-test-1764510460809",
+  "value": 15000,
+  "creationDate": "2025-11-30T13:47:40.809Z",  
+  "items": [
+    {
+      "itemId": "2434",
+      "quantity": 2,
+      "itemValue": 5000
+    },
+    {
+      "itemId": "2435",
+      "quantity": 1,
+      "itemValue": 5000
+    }
+  ]
+}
+
+Inserindo no banco...
+Conectado ao PostgreSQL (Render.com)
+Pedido inserido com ID: 1
+Item inserido com ID: 1
+Item inserido com ID: 2
+Transação confirmada com sucesso
+
+Pedido criado com sucesso!
+ID do pedido no banco: 1
+Order ID: v10089016vdb-test-1764510460809
+Quantidade de itens: 2
+
+Detalhes completos:
+{
+  "pedido": {
+    "id": 1,
+    "order_id": "v10089016vdb-test-1764510460809",
+    "value": "15000.00",
+    "creation_date": "2025-11-30T16:47:40.809Z",
+    "created_at": "2025-11-30T16:47:42.947Z",
+    "updated_at": "2025-11-30T16:47:42.947Z"
+  },
+  "itens": [
+    {
+      "id": 1,
+      "pedido_id": 1,
+      "item_id": "2434",
+      "quantity": 2,
+      "item_value": "5000.00",
+      "created_at": "2025-11-30T16:47:42.947Z"
+    },
+    {
+      "id": 2,
+      "pedido_id": 1,
+      "item_id": "2435",
+      "quantity": 1,
+      "item_value": "5000.00",
+      "created_at": "2025-11-30T16:47:42.947Z"
+    }
+  ]
+}
+
+
+Teste 2: Buscar pedido por order_id
+Pedido encontrado!
+Order ID: v10089016vdb-test-1764510460809
+Valor: 15000.00
+Itens: 2
+
+
+Todos os testes concluídos com sucesso!
+Pedido de teste criado: v10089016vdb-test-1764510460809
