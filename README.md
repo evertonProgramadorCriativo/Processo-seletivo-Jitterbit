@@ -69,6 +69,7 @@ Testando funções do Mapper...
 
 Teste 1: Mapeamento de pedido válido
 Mapeamento bem-sucedido!
+```
 Pedido de entrada:
 {
   "numeroPedido": "v10089015vdb-01",
@@ -131,7 +132,7 @@ Mapeamento banco → API bem-sucedido!
   "criadoEm": "2024-11-29T10:00:00Z",
   "atualizadoEm": "2024-11-29T10:00:00Z"
 }
-
+```
  Testes passaram com sucesso!
 
 
@@ -139,7 +140,7 @@ Mapeamento banco → API bem-sucedido!
 
 PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node middlewares/errorHandler.js    
 Testando funções do Error Handler...
-
+```
 Teste 1: Criar AppError customizado       
 AppError criado:
 --+- Mensagem: Teste de erro
@@ -189,7 +190,7 @@ Resposta JSON:
   }
 }
 OK ---+-  errorHandler funcionando
-
+```
 Testes do Error Handler concluídos!
 
 
@@ -200,6 +201,7 @@ PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node mod
 Testando Model - Criar Pedido...
 
 Teste 1: Criar pedido no banco
+```
 Dados do pedido:
 {
   "orderId": "v10089016vdb-test-1764510460809",
@@ -267,7 +269,7 @@ Pedido encontrado!
 Order ID: v10089016vdb-test-1764510460809
 Valor: 15000.00
 Itens: 2
-
+```
 
 Todos os testes concluídos com sucesso!
 Pedido de teste criado: v10089016vdb-test-1764510460809
@@ -277,8 +279,8 @@ Pedido de teste criado: v10089016vdb-test-1764510460809
 
 
 PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node tests/testBuscarPedido.js       
-Testando buscar pedido por ID 
-
+### Testando buscar pedido por ID 
+```
 Passo 1: Criando pedido de teste...
 Conectado ao PostgreSQL (Render.com)
 Pedido inserido com ID: 2
@@ -315,13 +317,13 @@ OK ---+- Retornou null corretamente para pedido inexistente
 
 Testes concluídos com sucesso!
 Pedido de teste: v10089017vdb-buscar-1764512099573
-
+```
 
 ## 7 Listar Todos os Pedidos
 
 PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node tests/testListarPedidos.js
 Testando listar todos os pedidos
-
+```
 Criando pedidos de teste...
 Conectado ao PostgreSQL (Render.com)
 Pedido inserido com ID: 3
@@ -335,9 +337,11 @@ Transação confirmada com sucesso
 OK - Pedido 2 criado: v10089019vdb-list-2-1764512749653
 Teste: Listando todos os pedidos do banco...
 OK - Total de pedidos encontrados: 4
+```
 Listagem dos pedidos:
-============================================================
 
+============================================================
+```
 Pedido 1:
   Order ID: v10089019vdb-list-2-1764512749653
   Valor Total: 7500.00
@@ -376,8 +380,52 @@ Pedido 4:
   Itens:
     1. ID: 2434 | Qtd: 2 | Valor: 5000.00
     2. ID: 2435 | Qtd: 1 | Valor: 5000.00
-
+```
 ============================================================
 
 
 Teste finalizado com sucesso!
+
+## 8 Funcionalidade Atualizando o  Pedido Update
+
+```
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node tests/testAtualizarPedido.js    
+Testando atualizar pedido 
+
+Criando pedido inicial...
+Conectado ao PostgreSQL (Render.com)
+Pedido inserido com ID: 5
+Item inserido com ID: 8
+Transação confirmada com sucesso
+OK - Pedido criado: v10089020vdb-update-1764519511570
+Valor inicial: 10000
+Itens iniciais: 1
+ Buscando pedido antes da atualização...
+OK - Pedido encontrado
+Valor: 10000.00
+Quantidade de itens: 1
+Atualizando pedido...
+OK - Pedido atualizado com sucesso!
+Comparação:
+Valor ANTES: 10000.00
+Valor DEPOIS: 15000.00
+Itens ANTES: 1
+Itens DEPOIS: 2
+Novos itens:
+  Item 1:
+ - ID: 4001
+ - Quantidade: 3
+ - Valor: 5000.00
+  Item 2:
+ - ID: 4002
+ - Quantidade: 1
+ - Valor: 5000.00
+
+Tentar atualizar pedido inexistente
+Tentando atualizar order_id: pedido-nao-existe-999
+OK - Retornou null corretamente para pedido inexistente
+
+
+Testes concluídos com sucesso!
+Pedido de teste: v10089020vdb-update-1764519511570
+```
