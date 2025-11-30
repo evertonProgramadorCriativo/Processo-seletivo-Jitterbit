@@ -429,3 +429,31 @@ OK - Retornou null corretamente para pedido inexistente
 Testes concluídos com sucesso!
 Pedido de teste: v10089020vdb-update-1764519511570
 ```
+
+
+## 9 Funcionalidade Deleta 
+
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node tests/testDeletarPedido.js
+Testando deletar pedido
+```
+Criando pedido de teste...
+Conectado ao PostgreSQL (Render.com)
+Pedido inserido com ID: 6
+Item inserido com ID: 11
+Transação confirmada com sucesso
+OK - Pedido criado: v10089021vdb-delete-1764519911358
+Verificando que o pedido existe...
+OK - Pedido confirmado no banco
+  Order ID: v10089021vdb-delete-1764519911358
+  Valor: 6000.00
+  Itens: 1
+Deletando pedido...
+OK - Pedido deletado com sucesso!
+Verificando que o pedido foi deletado...
+OK - Pedido não existe mais no banco (deletado corretamente)
+Tentar deletar pedido inexistente
+Tentando deletar order_id: pedido-nao-existe-777
+OK - Retornou false corretamente para pedido inexistente
+
+```
+Pedido de teste deletado: v10089021vdb-delete-1764519911358

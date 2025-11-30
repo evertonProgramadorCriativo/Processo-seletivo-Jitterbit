@@ -1,4 +1,4 @@
-const { criarPedido, deletarPedido, buscarPedidoPorOrderId } = require('../src/models/pedidoModel');
+const { criarPedido, deletarPedido, buscarPedidoPorOrderId } = require('../models/pedidoModel');
 
 async function testarDeletarPedido() {
   try {
@@ -17,7 +17,7 @@ async function testarDeletarPedido() {
     console.log('Criando pedido de teste...');
     await criarPedido(pedidoTeste);
     console.log('OK - Pedido criado:', pedidoTeste.orderId);
-    console.log('');
+     
 
     // Verificar que o pedido existe
     console.log('Verificando que o pedido existe...');
@@ -32,10 +32,10 @@ async function testarDeletarPedido() {
       console.log('ERRO - Pedido não encontrado');
     }
 
-    console.log('');
+     
 
     // Deletar pedido
-    console.log('Passo 3: Deletando pedido...');
+    console.log('Deletando pedido...');
     const resultadoDelete = await deletarPedido(pedidoTeste.orderId);
 
     if (resultadoDelete) {
@@ -44,7 +44,7 @@ async function testarDeletarPedido() {
       console.log('ERRO - Falha ao deletar pedido');
     }
 
-    console.log('');
+     
 
     // Verificar que o pedido não existe mais
     console.log('Verificando que o pedido foi deletado...');
@@ -56,10 +56,10 @@ async function testarDeletarPedido() {
       console.log('ERRO - Pedido ainda existe no banco');
     }
 
-    console.log('');
+     
 
-    // Teste 2: Tentar deletar pedido inexistente
-    console.log('Teste 2: Tentar deletar pedido inexistente');
+    //  Tentar deletar pedido inexistente
+    console.log('Tentar deletar pedido inexistente');
     const orderIdInexistente = 'pedido-nao-existe-777';
     console.log('Tentando deletar order_id:', orderIdInexistente);
     
@@ -72,7 +72,7 @@ async function testarDeletarPedido() {
     }
 
     console.log('\n');
-    console.log('ETAPA 10 concluída com sucesso!');
+    
     console.log('Pedido de teste deletado: ' + pedidoTeste.orderId);
     process.exit(0);
 
