@@ -60,3 +60,78 @@ SELECT * FROM itens_pedido LIMIT 5;
 
 #### -- Sair
 \q
+
+
+##  O Mapper vai transformar o JSON que recebemos da API para o formato que será salvo no banco de dados
+
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node utils/mapper.js
+Testando funções do Mapper...
+
+Teste 1: Mapeamento de pedido válido
+Mapeamento bem-sucedido!
+Pedido de entrada:
+{
+  "numeroPedido": "v10089015vdb-01",
+  "valorTotal": 10000,
+  "dataCriacao": "2023-07-19T12:24:11.5299601+00:00",
+  "items": [
+    {
+      "idItem": "2434",
+      "quantidadeItem": 1,
+      "valorItem": 1000
+    },
+    {
+      "idItem": "2435",
+      "quantidadeItem": 2,
+      "valorItem": 2000
+    }
+  ]
+}
+
+ Pedido mapeado (formato do banco):
+{
+  "orderId": "v10089015vdb-01",
+  "value": 10000,
+  "creationDate": "2023-07-19T12:24:11.529Z",
+  "items": [
+    {
+      "itemId": "2434",
+      "quantity": 1,
+      "itemValue": 1000
+    },
+    {
+      "itemId": "2435",
+      "quantity": 2,
+      "itemValue": 2000
+    }
+  ]
+}
+
+Teste 2: Pedido sem numeroPedido (esperado: erro)
+Erro capturado corretamente: Campo obrigatório ausente: numeroPedido
+
+ Teste 3: Pedido sem items (esperado: erro)
+Erro capturado corretamente: O pedido deve conter pelo menos um item
+
+ Teste 4: Mapeamento do banco para API
+Mapeamento banco → API bem-sucedido!
+{
+  "id": 1,
+  "numeroPedido": "v10089015vdb-01",
+  "valorTotal": 10000,
+  "dataCriacao": "2023-07-19T12:24:11.529Z",
+  "items": [
+    {
+      "id": 1,
+      "idItem": "2434",
+      "quantidadeItem": 1,
+      "valorItem": 1000
+    }
+  ],
+  "criadoEm": "2024-11-29T10:00:00Z",
+  "atualizadoEm": "2024-11-29T10:00:00Z"
+}
+
+ Testes passaram com sucesso!
+
+
