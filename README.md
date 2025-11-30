@@ -340,7 +340,7 @@ OK - Total de pedidos encontrados: 4
 ```
 Listagem dos pedidos:
 
-============================================================
+  
 ```
 Pedido 1:
   Order ID: v10089019vdb-list-2-1764512749653
@@ -381,7 +381,7 @@ Pedido 4:
     1. ID: 2434 | Qtd: 2 | Valor: 5000.00
     2. ID: 2435 | Qtd: 1 | Valor: 5000.00
 ```
-============================================================
+  
 
 
 Teste finalizado com sucesso!
@@ -468,3 +468,403 @@ Os **Controllers** são responsáveis por:
 **Transformar** dados (usar Mapper)
 Retornar respostas HTTP adequadas
 Tratar erros
+
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node controllers/pedidoController.js 
+Testando Controllers...
+
+Criar Pedido Controller
+==================================================
+Controller: Criando novo pedido...
+```
+Body recebido: {
+  "numeroPedido": "v10089022vdb-controller-1764520950833",
+  "valorTotal": 12000,
+  "dataCriacao": "2025-11-30T16:42:30.833Z",
+  "items": [
+    {
+      "idItem": "6001",
+      "quantidadeItem": 2,
+      "valorItem": 6000
+    }
+  ]
+}
+Dados mapeados com sucesso
+Conectado ao PostgreSQL (Render.com)
+Pedido inserido com ID: 7
+Item inserido com ID: 12
+Transação confirmada com sucesso
+Pedido criado no banco com ID: 7
+
+Resposta HTTP:
+Status: 201
+
+```
+
+```
+Body: {
+  "success": true,
+  "message": "Pedido criado com sucesso",
+  "data": {
+    "id": 7,
+    "numeroPedido": "v10089022vdb-controller-1764520950833",
+    "valorTotal": 12000,
+    "dataCriacao": "2025-11-30T19:42:30.833Z",
+    "items": [
+      {
+        "id": 12,
+        "idItem": "6001",
+        "quantidadeItem": 2,
+        "valorItem": 6000
+      }
+    ],
+    "criadoEm": "2025-11-30T19:42:33.283Z",
+    "atualizadoEm": "2025-11-30T19:42:33.283Z"
+  }
+}
+
+OK - Pedido criado com sucesso via controller
+
+```
+
+```
+ Obter Pedido Controller
+==================================================
+Controller: Buscando pedido: v10089022vdb-controller-1764520950833
+Pedido encontrado: v10089022vdb-controller-1764520950833
+
+Resposta HTTP:
+Status: 200
+Body: {
+  "success": true,
+  "message": "Pedido encontrado",
+  "data": {
+    "id": 7,
+    "numeroPedido": "v10089022vdb-controller-1764520950833",
+    "valorTotal": 12000,
+    "dataCriacao": "2025-11-30T19:42:30.833Z",
+    "items": [
+      {
+        "id": 12,
+        "idItem": "6001",
+        "quantidadeItem": 2,
+        "valorItem": 6000
+      }
+    ],
+    "criadoEm": "2025-11-30T19:42:33.283Z",
+    "atualizadoEm": "2025-11-30T19:42:33.283Z"
+  }
+}
+
+OK - Pedido encontrado via controller
+```
+
+ Listar Pedidos Controller
+==================================================
+```
+Controller: Listando todos os pedidos...
+Total de pedidos encontrados: 6
+
+Resposta HTTP:
+Status: 200
+Body: {
+  "success": true,
+  "message": "6 pedido(s) encontrado(s)",
+  "data": [
+    {
+      "id": 7,
+      "numeroPedido": "v10089022vdb-controller-1764520950833",
+      "valorTotal": 12000,
+      "dataCriacao": "2025-11-30T19:42:30.833Z",
+      "items": [
+        {
+          "id": 12,
+          "idItem": "6001",
+          "quantidadeItem": 2,
+          "valorItem": 6000
+        }
+      ],
+      "criadoEm": "2025-11-30T19:42:33.283Z",
+      "atualizadoEm": "2025-11-30T19:42:33.283Z"
+    },
+    {
+      "id": 5,
+      "numeroPedido": "v10089020vdb-update-1764519511570",
+      "valorTotal": 15000,
+      "dataCriacao": "2025-11-30T19:18:33.824Z",
+      "items": [
+        {
+          "id": 9,
+          "idItem": "4001",
+          "quantidadeItem": 3,
+          "valorItem": 5000
+        },
+        {
+          "id": 10,
+          "idItem": "4002",
+          "quantidadeItem": 1,
+          "valorItem": 5000
+        }
+      ],
+      "criadoEm": "2025-11-30T19:18:33.857Z",
+      "atualizadoEm": "2025-11-30T19:18:34.953Z"
+    },
+    {
+      "id": 4,
+      "numeroPedido": "v10089019vdb-list-2-1764512749653",
+      "valorTotal": 7500,
+      "dataCriacao": "2025-11-30T17:25:49.653Z",
+      "items": [
+        {
+          "id": 6,
+          "idItem": "3002",
+          "quantidadeItem": 2,
+          "valorItem": 3000
+        },
+        {
+          "id": 7,
+          "idItem": "3003",
+          "quantidadeItem": 1,
+          "valorItem": 1500
+        }
+      ],
+      "criadoEm": "2025-11-30T17:25:52.632Z",
+      "atualizadoEm": "2025-11-30T17:25:52.632Z"
+    },
+    {
+      "id": 3,
+      "numeroPedido": "v10089018vdb-list-1-1764512749652",
+      "valorTotal": 5000,
+      "dataCriacao": "2025-11-30T17:25:49.652Z",
+      "items": [
+        {
+          "id": 5,
+          "idItem": "3001",
+          "quantidadeItem": 1,
+          "valorItem": 5000
+        }
+      ],
+      "criadoEm": "2025-11-30T17:25:51.900Z",
+      "atualizadoEm": "2025-11-30T17:25:51.900Z"
+    },
+    {
+      "id": 2,
+      "numeroPedido": "v10089017vdb-buscar-1764512099573",
+      "valorTotal": 8500,
+      "dataCriacao": "2025-11-30T17:14:59.573Z",
+      "items": [
+        {
+          "id": 3,
+          "idItem": "1001",
+          "quantidadeItem": 3,
+          "valorItem": 2500
+        },
+        {
+          "id": 4,
+          "idItem": "1002",
+          "quantidadeItem": 1,
+          "valorItem": 1000
+        }
+      ],
+      "criadoEm": "2025-11-30T17:15:01.819Z",
+      "atualizadoEm": "2025-11-30T17:15:01.819Z"
+    },
+    {
+      "id": 1,
+      "numeroPedido": "v10089016vdb-test-1764510460809",
+      "valorTotal": 15000,
+      "dataCriacao": "2025-11-30T16:47:40.809Z",
+      "items": [
+        {
+          "id": 1,
+          "idItem": "2434",
+          "quantidadeItem": 2,
+          "valorItem": 5000
+        },
+        {
+          "id": 2,
+          "idItem": "2435",
+          "quantidadeItem": 1,
+          "valorItem": 5000
+        }
+      ],
+      "criadoEm": "2025-11-30T16:47:42.947Z",
+      "atualizadoEm": "2025-11-30T16:47:42.947Z"
+    }
+  ]
+}
+
+OK - Listagem realizada via controller
+```
+
+ ## 10 API DE GERENCIAMENTO DE PEDIDOS ,Configuração das  Rotas (Express Router) e Criando Servidor Express
+
+
+ Node.js v22.14.0
+[nodemon] app crashed - waiting for file changes before starting...
+[nodemon] restarting due to changes...
+[nodemon] starting `node server.js`
+Verificando conexão com banco de dados...
+Conectado ao PostgreSQL (Render.com)
+Teste de conexão bem-sucedido!
+Hora do servidor: 2025-11-30T17:04:07.665Z
+```
+  
+API DE GERENCIAMENTO DE PEDIDOS
+  
+Servidor rodando na porta: 3000
+URL: http://localhost:3000
+Ambiente: development
+  
+Endpoints disponíveis:
+  POST   http://localhost:3000/order
+  GET    http://localhost:3000/order/:orderId
+  GET    http://localhost:3000/order/list
+  PUT    http://localhost:3000/order/:orderId
+  DELETE http://localhost:3000/order/:orderId
+  
+  POST   http://localhost:3000/order
+  GET    http://localhost:3000/order/:orderId
+  GET    http://localhost:3000/order/list
+  PUT    http://localhost:3000/order/:orderId
+  DELETE http://localhost:3000/order/:orderId
+  
+Rotas auxiliares:
+  GET    http://localhost:3000/
+  GET    http://localhost:3000/health
+  
+ 
+Pressione Ctrl+C para parar o servidor
+  
+
+
+
+
+
+
+  POST   http://localhost:3000/order
+  GET    http://localhost:3000/order/:orderId
+  GET    http://localhost:3000/order/list
+  PUT    http://localhost:3000/order/:orderId
+  DELETE http://localhost:3000/order/:orderId
+  
+Rotas auxiliares:
+  GET    http://localhost:3000/
+  GET    http://localhost:3000/health
+  
+ 
+Pressione Ctrl+C para parar o servidor
+  
+
+
+
+  POST   http://localhost:3000/order
+  GET    http://localhost:3000/order/:orderId
+  GET    http://localhost:3000/order/list
+  PUT    http://localhost:3000/order/:orderId
+  DELETE http://localhost:3000/order/:orderId
+  
+Rotas auxiliares:
+  GET    http://localhost:3000/
+  GET    http://localhost:3000/health
+  
+ 
+Pressione Ctrl+C para parar o servidor
+  
+
+  POST   http://localhost:3000/order
+  GET    http://localhost:3000/order/:orderId
+  GET    http://localhost:3000/order/list
+  PUT    http://localhost:3000/order/:orderId
+  DELETE http://localhost:3000/order/:orderId
+  
+Rotas auxiliares:
+  GET    http://localhost:3000/
+  GET    http://localhost:3000/health
+  
+ 
+Pressione Ctrl+C para parar o servidor
+  
+
+
+  POST   http://localhost:3000/order
+  GET    http://localhost:3000/order/:orderId
+  GET    http://localhost:3000/order/list
+  PUT    http://localhost:3000/order/:orderId
+  DELETE http://localhost:3000/order/:orderId
+  
+Rotas auxiliares:
+  GET    http://localhost:3000/
+  GET    http://localhost:3000/health
+  
+ 
+Pressione Ctrl+C para parar o servidor
+  POST   http://localhost:3000/order
+  GET    http://localhost:3000/order/:orderId
+  GET    http://localhost:3000/order/list
+  PUT    http://localhost:3000/order/:orderId
+  DELETE http://localhost:3000/order/:orderId
+  
+Rotas auxiliares:
+  GET    http://localhost:3000/
+  GET    http://localhost:3000/health
+  
+ 
+Pressione Ctrl+C para parar o servidor
+  GET    http://localhost:3000/order/list
+  PUT    http://localhost:3000/order/:orderId
+  DELETE http://localhost:3000/order/:orderId
+  
+Rotas auxiliares:
+  GET    http://localhost:3000/
+  GET    http://localhost:3000/health
+  
+ 
+Pressione Ctrl+C para parar o servidor
+Rotas auxiliares:
+  GET    http://localhost:3000/
+  GET    http://localhost:3000/health
+  
+ 
+Pressione Ctrl+C para parar o servidor
+ 
+Pressione Ctrl+C para parar o servidor
+  
+
+```
+
+## testando com CUrl
+```
+curl http://localhost:3000
+
+
+StatusCode        : 200
+StatusDescription : OK 
+Content           : {"success":true,"message":"API de Gerenciamento de
+                    Pedidos","version":"1.0.0","endpoints":{"criar_pedido":"POST
+                    /order","obter_pedido":"GET /order/:orderId","listar_pedidos":"GET
+                    /order/list","atualiz...
+RawContent        : HTTP/1.1 200 OK
+                    Access-Control-Allow-Origin: *
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Length: 368
+                    Content-Type: application/json; charset=utf-8
+                    Date: Sun, 30 Nov 2025 17:10:39 GMT...
+Forms             : {}
+Headers           : {[Access-Control-Allow-Origin, *], [Connection, keep-alive], [Keep-Alive, timeout=5],    
+                    [Content-Length, 368]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : System.__ComObject
+RawContentLength  : 368
+
+
+```
+
+
+
+
+
+
+

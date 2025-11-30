@@ -44,7 +44,7 @@ async function testarListarPedidos() {
 
     if (todosPedidos.length > 0) {
       console.log('Listagem dos pedidos:');
-      console.log('='.repeat(60));
+       
       
       todosPedidos.forEach((registro, index) => {
         const { pedido, itens } = registro;
@@ -64,7 +64,7 @@ async function testarListarPedidos() {
         }
       });
 
-      console.log('\n' + '='.repeat(60));
+       
     } else {
       console.log('Nenhum pedido encontrado no banco');
     }
