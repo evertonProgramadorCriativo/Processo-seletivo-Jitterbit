@@ -271,3 +271,49 @@ Itens: 2
 
 Todos os testes concluídos com sucesso!
 Pedido de teste criado: v10089016vdb-test-1764510460809
+
+
+## 6 Buscar Pedido por ID
+
+
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node tests/testBuscarPedido.js       
+Testando buscar pedido por ID 
+
+Passo 1: Criando pedido de teste...
+Conectado ao PostgreSQL (Render.com)
+Pedido inserido com ID: 2
+Item inserido com ID: 3
+Item inserido com ID: 4
+Transação confirmada com sucesso
+OK ---+- Pedido criado com order_id: v10089017vdb-buscar-1764512099573
+
+Teste 1: Buscar pedido existente
+Buscando order_id: v10089017vdb-buscar-1764512099573
+OK ---+- Pedido encontrado!
+
+Dados do pedido:
+---+- ID interno: 2
+---+- Order ID: v10089017vdb-buscar-1764512099573
+---+- Valor: 8500.00
+---+- Data criação: 2025-11-30T17:14:59.573Z
+---+- Quantidade de itens: 2
+Itens do pedido:
+  Item 1:
+    ---+- ID: 1001
+    ---+- Quantidade: 3
+    ---+- Valor: 2500.00
+  Item 2:
+    ---+- ID: 1002
+    ---+- Quantidade: 1
+    ---+- Valor: 1000.00
+
+
+Teste 2: Buscar pedido inexistente
+Buscando order_id: pedido-nao-existe-12345
+OK ---+- Retornou null corretamente para pedido inexistente
+
+
+Testes concluídos com sucesso!
+Pedido de teste: v10089017vdb-buscar-1764512099573
+
+
