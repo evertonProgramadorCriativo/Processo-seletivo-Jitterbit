@@ -457,3 +457,14 @@ OK - Retornou false corretamente para pedido inexistente
 
 ```
 Pedido de teste deletado: v10089021vdb-delete-1764519911358
+
+## Camada de Controller (Lógica de Negócio)
+
+Os **Controllers** são responsáveis por:
+
+**Receber** requisições HTTP
+**Validar** dados de entrada
+**Chamar** os Models
+**Transformar** dados (usar Mapper)
+Retornar respostas HTTP adequadas
+Tratar erros
