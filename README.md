@@ -825,9 +825,7 @@ Rotas auxiliares:
   GET    http://localhost:3000/health
   
  
-Pressione Ctrl+C para parar o servidor
- 
-Pressione Ctrl+C para parar o servidor
+
   
 
 ```
@@ -863,8 +861,47 @@ RawContentLength  : 368
 ```
 
 
+## 11 Usando Biblioteca Jest 
 
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> 
+### npm test
+```
+npm test
 
+> pedidos-api@1.0.0 test
+> jest
 
+ PASS  utils/mapper.test.js
+  Mapper - mapearPedidoParaBanco
+    √ deve mapear pedido válido corretamente (6 ms)
+    √ deve lançar erro quando numeroPedido está ausente (23 ms)
+    √ deve lançar erro quando valorTotal está ausente (2 ms)
+    √ deve lançar erro quando dataCriacao está ausente (2 ms)
+    √ deve lançar erro quando items está vazio (2 ms)
+    √ deve lançar erro quando items não é um array (1 ms)
+    √ deve lançar erro quando item não possui idItem (1 ms)
+    √ deve lançar erro quando pedido é null (1 ms)
+    √ deve converter strings numéricas corretamente (1 ms)
+  Mapper - mapearPedidoParaAPI
+    √ deve mapear pedido do banco para API corretamente (2 ms)
+    √ deve retornar null quando pedido do banco é null (1 ms)
+    √ deve mapear pedido com array de itens vazio (1 ms)
+    √ deve converter valores string do banco para number (1 ms)
+  Mapper - validarNumero
+    √ deve validar número positivo corretamente (2 ms)
+    √ deve lançar erro para número negativo (1 ms)
+    √ deve lançar erro para valor não numérico (1 ms)
+  Mapper - validarData
+    √ deve validar data válida corretamente (1 ms)
+    √ deve lançar erro para data inválida (1 ms)
+    √ deve aceitar objeto Date (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       19 passed, 19 total
+Snapshots:   0 total
+Time:        0.616 s, estimated 1 s
+Ran all test suites.
+
+```
 
 
