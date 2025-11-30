@@ -1,45 +1,1110 @@
+#  API RESTful de Gerenciamento de Pedidos
+
+> **Sistema completo de gestão de pedidos com autenticação JWT, documentação Swagger e banco de dados PostgreSQL**
+
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-green.svg)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-4.18-blue.svg)](https://expressjs.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue.svg)](https://www.postgresql.org/)
+[![JWT](https://img.shields.io/badge/JWT-Auth-orange.svg)](https://jwt.io/)
+[![Swagger](https://img.shields.io/badge/Swagger-Docs-green.svg)](https://swagger.io/)
+[![License](https://img.shields.io/badge/License-ISC-yellow.svg)](LICENSE)
+
+
+##  Descrição do Projeto
+
+Esta é uma **API RESTful robusta** desenvolvida com Node.js e Express para gerenciamento completo de pedidos. O sistema oferece autenticação segura via JWT, documentação interativa com Swagger UI, persistência de dados em PostgreSQL hospedado no Render.com, e uma arquitetura MVC bem estruturada com separação de responsabilidades.
+
+###  Características Principais
+
+-  **Autenticação JWT** - Sistema seguro de login e registro com tokens
+-  **Documentação Swagger** - Interface interativa para testar todos os endpoints
+-  **PostgreSQL** - Banco de dados robusto hospedado no Render.com
+-  **Arquitetura MVC** - Código organizado e escalável
+-  **Validação de Dados** - Validações rigorosas em todas as entradas
+-  **Criptografia** - Senhas protegidas com bcrypt
+-  **Testes Automatizados** - Suite de testes com Jest
+-  **Logs Detalhados** - Rastreamento completo de requisições
+-  **Deploy Ready** - Pronto para produção no Render.com
+
+---
+
+##  Início Rápido
+
+### Pré-requisitos
+
+- Node.js 18.x ou superior
+- PostgreSQL 14+ (ou use o Render.com)
+- npm ou yarn
+
+### Instalação
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/api-pedidos.git
+cd api-pedidos
+
+# 2. Instale as dependências
+npm install
+
+# 3. Configure as variáveis de ambiente
+cp .env.example .env
+# Edite o arquivo .env com suas configurações
+
+# 4. Crie as tabelas no banco de dados
+npm run create-tables
+npm run create-users-table
+
+# 5. Inicie o servidor
+npm run dev
+```
+
+### Acesso Rápido
+
+-  **API Local**: http://localhost:3000
+-  **API Deploy Online**: https://processo-seletivo-jitterbit.onrender.com/
+-  **Documentação Swagger (Local)**: http://localhost:3000/api-docs
+-  **Documentação Swagger (Online)**: https://processo-seletivo-jitterbit.onrender.com/api-docs
+-  **Health Check (Local)**: http://localhost:3000/health
+-  **Health Check (Online)**: https://processo-seletivo-jitterbit.onrender.com/health
+
+---
+
+##  Lista Completa de Rotas
+
+###  Rotas Gerais (Públicas)
+
+| Método | Rota | Descrição | Autenticação |
+|--------|------|-----------|--------------|
+| `GET` | `/` | Informações da API e endpoints disponíveis |  Não |
+| `GET` | `/health` | Status de saúde da API e conexão com banco |  Não |
+| `GET` | `/api-docs` | Documentação interativa Swagger UI |  Não |
+
+**Links Rápidos**:
+- Local: http://localhost:3000/
+- Online: https://processo-seletivo-jitterbit.onrender.com/
+
+---
+
+###  Rotas de Autenticação
+
+| Método | Rota | Descrição | Autenticação |
+|--------|------|-----------|--------------|
+| `POST` | `/auth/register` | Registrar novo usuário e receber token |  Não |
+| `POST` | `/auth/login` | Fazer login e receber token JWT |  Não |
+| `GET` | `/auth/me` | Obter dados do usuário autenticado |  Sim |
+
+**Links Rápidos**:
+- **Registrar**: 
+  - Local: `POST http://localhost:3000/auth/register`
+  - Online: `POST https://processo-seletivo-jitterbit.onrender.com/auth/register`
+
+- **Login**: 
+  - Local: `POST http://localhost:3000/auth/login`
+  - Online: `POST https://processo-seletivo-jitterbit.onrender.com/auth/login`
+
+- **Perfil**: 
+  - Local: `GET http://localhost:3000/auth/me`
+  - Online: `GET https://processo-seletivo-jitterbit.onrender.com/auth/me`
+
+---
+
+###  Rotas de Pedidos (Requerem Token)
+
+| Método | Rota | Descrição | Autenticação |
+|--------|------|-----------|--------------|
+| `POST` | `/order` | Criar novo pedido |  Sim |
+| `GET` | `/order/list` | Listar todos os pedidos |  Sim |
+| `GET` | `/order/:orderId` | Buscar pedido específico por ID |  Sim |
+| `PUT` | `/order/:orderId` | Atualizar pedido existente |  Sim |
+| `DELETE` | `/order/:orderId` | Deletar pedido |  Sim |
+
+**Links Rápidos**:
+- **Criar Pedido**: 
+  - Local: `POST http://localhost:3000/order`
+  - Online: `POST https://processo-seletivo-jitterbit.onrender.com/order`
+
+- **Listar Pedidos**: 
+  - Local: `GET http://localhost:3000/order/list`
+  - Online: `GET https://processo-seletivo-jitterbit.onrender.com/order/list`
+
+- **Buscar Pedido**: 
+  - Local: `GET http://localhost:3000/order/{numeroPedido}`
+  - Online: `GET https://processo-seletivo-jitterbit.onrender.com/order/{numeroPedido}`
+
+- **Atualizar Pedido**: 
+  - Local: `PUT http://localhost:3000/order/{numeroPedido}`
+  - Online: `PUT https://processo-seletivo-jitterbit.onrender.com/order/{numeroPedido}`
+
+- **Deletar Pedido**: 
+  - Local: `DELETE http://localhost:3000/order/{numeroPedido}`
+  - Online: `DELETE https://processo-seletivo-jitterbit.onrender.com/order/{numeroPedido}`
+
+---
+
+###  Resumo de Rotas
+
+```
+Total de Rotas: 11
+
+   Rotas Públicas (sem autenticação): 5
+   - GET  /
+   - GET  /health
+   - GET  /api-docs
+   - POST /auth/register
+   - POST /auth/login
+
+   Rotas Protegidas (requerem token JWT): 6
+   - GET    /auth/me
+   - POST   /order
+   - GET    /order/list
+   - GET    /order/:orderId
+   - PUT    /order/:orderId
+   - DELETE /order/:orderId
+```
+
+---
+
+###  Como Autenticar nas Rotas Protegidas
+
+Para acessar rotas que requerem autenticação, inclua o token no header:
+
+```bash
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+**Exemplo com cURL**:
+```bash
+curl -X GET http://localhost:3000/order/list \
+  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+```
+
+**Exemplo com Postman**:
+1. Authorization → Type: Bearer Token
+2. Token: Cole seu token
+3. Enviar requisição
+
+**Exemplo com Swagger**:
+1. Clique no botão "Authorize" 
+2. Digite: `Bearer SEU_TOKEN_AQUI`
+3. Clique em "Authorize"
+4. Todas as rotas protegidas agora funcionam
+
+---
+
+##  Documentação das Rotas
+
+###  Rotas de Autenticação
+
+Todas as rotas de autenticação são **públicas** (não requerem token).
+
+#### 1. Registrar Novo Usuário
+
+**Endpoint**: `POST /auth/register`
+
+**Descrição**: Cria uma nova conta de usuário no sistema.
+
+**Body (JSON)**:
+```json
+{
+  "nome": "João Silva",
+  "email": "joao@exemplo.com",
+  "senha": "senha123"
+}
+```
+
+**Resposta de Sucesso (201)**:
+```json
+{
+  "success": true,
+  "message": "Usuário registrado com sucesso",
+  "data": {
+    "usuario": {
+      "id": 1,
+      "nome": "João Silva",
+      "email": "joao@exemplo.com",
+      "criadoEm": "2024-11-30T10:00:00.000Z"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X POST http://localhost:3000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nome": "João Silva",
+    "email": "joao@exemplo.com",
+    "senha": "senha123"
+  }'
+```
+
+**Swagger**:
+1. Acesse http://localhost:3000/api-docs
+2. Expanda `POST /auth/register`
+3. Clique em "Try it out"
+4. Edite o JSON de exemplo
+5. Clique em "Execute"
+6. Copie o token da resposta
+
+**Postman**:
+1. Método: POST
+2. URL: `http://localhost:3000/auth/register`
+3. Headers: `Content-Type: application/json`
+4. Body (raw): Cole o JSON acima
+5. Send
+
+---
+
+#### 2. Fazer Login
+
+**Endpoint**: `POST /auth/login`
+
+**Descrição**: Autentica um usuário e retorna um token JWT válido por 24 horas.
+
+**Body (JSON)**:
+```json
+{
+  "email": "joao@exemplo.com",
+  "senha": "senha123"
+}
+```
+
+**Resposta de Sucesso (200)**:
+```json
+{
+  "success": true,
+  "message": "Login realizado com sucesso",
+  "data": {
+    "usuario": {
+      "id": 1,
+      "nome": "João Silva",
+      "email": "joao@exemplo.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "joao@exemplo.com",
+    "senha": "senha123"
+  }'
+```
+
+**Swagger**:
+1. Expanda `POST /auth/login`
+2. "Try it out"
+3. Edite email e senha
+4. "Execute"
+5. **IMPORTANTE**: Copie o token para usar nas próximas requisições
+
+**Postman**:
+1. POST `http://localhost:3000/auth/login`
+2. Body (raw JSON): Cole o JSON
+3. Send
+4. Copie o token da resposta
+
+---
+
+#### 3. Obter Perfil do Usuário
+
+**Endpoint**: `GET /auth/me`
+
+**Descrição**: Retorna os dados do usuário autenticado.
+
+**Headers**:
+```
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+**Resposta de Sucesso (200)**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "nome": "João Silva",
+    "email": "joao@exemplo.com",
+    "criadoEm": "2024-11-30T10:00:00.000Z"
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X GET http://localhost:3000/auth/me \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+```
+
+**Swagger**:
+1. Clique no botão **"Authorize"**  (topo da página)
+2. Digite: `Bearer SEU_TOKEN_AQUI`
+3. "Authorize" → "Close"
+4. Expanda `GET /auth/me`
+5. "Try it out" → "Execute"
+
+**Postman**:
+1. GET `http://localhost:3000/auth/me`
+2. Authorization → Type: Bearer Token
+3. Token: Cole seu token
+4. Send
+
+---
+---
+
+
+##  Documentação das Rotas
+
+###  Rotas de Autenticação
+
+Todas as rotas de autenticação são **públicas** (não requerem token).
+
+#### 1. Registrar Novo Usuário
+
+**Endpoint**: `POST /auth/register`
+
+**Descrição**: Cria uma nova conta de usuário no sistema.
+
+**Body (JSON)**:
+```json
+{
+  "nome": "João Silva",
+  "email": "joao@exemplo.com",
+  "senha": "senha123"
+}
+```
+
+**Resposta de Sucesso (201)**:
+```json
+{
+  "success": true,
+  "message": "Usuário registrado com sucesso",
+  "data": {
+    "usuario": {
+      "id": 1,
+      "nome": "João Silva",
+      "email": "joao@exemplo.com",
+      "criadoEm": "2024-11-30T10:00:00.000Z"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X POST http://localhost:3000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nome": "João Silva",
+    "email": "joao@exemplo.com",
+    "senha": "senha123"
+  }'
+```
+
+**Swagger**:
+1. Acesse http://localhost:3000/api-docs
+2. Expanda `POST /auth/register`
+3. Clique em "Try it out"
+4. Edite o JSON de exemplo
+5. Clique em "Execute"
+6. Copie o token da resposta
+
+**Postman**:
+1. Método: POST
+2. URL: `http://localhost:3000/auth/register`
+3. Headers: `Content-Type: application/json`
+4. Body (raw): Cole o JSON acima
+5. Send
+
+---
+
+#### 2. Fazer Login
+
+**Endpoint**: `POST /auth/login`
+
+**Descrição**: Autentica um usuário e retorna um token JWT válido por 24 horas.
+
+**Body (JSON)**:
+```json
+{
+  "email": "joao@exemplo.com",
+  "senha": "senha123"
+}
+```
+
+**Resposta de Sucesso (200)**:
+```json
+{
+  "success": true,
+  "message": "Login realizado com sucesso",
+  "data": {
+    "usuario": {
+      "id": 1,
+      "nome": "João Silva",
+      "email": "joao@exemplo.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "joao@exemplo.com",
+    "senha": "senha123"
+  }'
+```
+
+**Swagger**:
+1. Expanda `POST /auth/login`
+2. "Try it out"
+3. Edite email e senha
+4. "Execute"
+5. **IMPORTANTE**: Copie o token para usar nas próximas requisições
+
+**Postman**:
+1. POST `http://localhost:3000/auth/login`
+2. Body (raw JSON): Cole o JSON
+3. Send
+4. Copie o token da resposta
+
+---
+
+#### 3. Obter Perfil do Usuário
+
+**Endpoint**: `GET /auth/me`
+
+**Descrição**: Retorna os dados do usuário autenticado.
+
+**Headers**:
+```
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+**Resposta de Sucesso (200)**:
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "nome": "João Silva",
+    "email": "joao@exemplo.com",
+    "criadoEm": "2024-11-30T10:00:00.000Z"
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X GET http://localhost:3000/auth/me \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+```
+
+**Swagger**:
+1. Clique no botão **"Authorize"**  (topo da página)
+2. Digite: `Bearer SEU_TOKEN_AQUI`
+3. "Authorize" → "Close"
+4. Expanda `GET /auth/me`
+5. "Try it out" → "Execute"
+
+**Postman**:
+1. GET `http://localhost:3000/auth/me`
+2. Authorization → Type: Bearer Token
+3. Token: Cole seu token
+4. Send
+
+---
+
+###  Rotas de Pedidos
+
+Todas as rotas de pedidos **requerem autenticação** (token JWT).
+
+#### 4. Criar Novo Pedido
+
+**Endpoint**: `POST /order`
+
+**Descrição**: Cria um novo pedido no sistema com seus respectivos itens.
+
+**Headers**:
+```
+Authorization: Bearer SEU_TOKEN_AQUI
+Content-Type: application/json
+```
+
+**Body (JSON)**:
+```json
+{
+  "numeroPedido": "v10089015vdb-01",
+  "valorTotal": 10000,
+  "dataCriacao": "2023-07-19T12:24:11.529Z",
+  "items": [
+    {
+      "idItem": "2434",
+      "quantidadeItem": 2,
+      "valorItem": 5000
+    },
+    {
+      "idItem": "2435",
+      "quantidadeItem": 1,
+      "valorItem": 5000
+    }
+  ]
+}
+```
+
+**Resposta de Sucesso (201)**:
+```json
+{
+  "success": true,
+  "message": "Pedido criado com sucesso",
+  "data": {
+    "id": 1,
+    "numeroPedido": "v10089015vdb-01",
+    "valorTotal": 10000,
+    "dataCriacao": "2023-07-19T12:24:11.529Z",
+    "items": [
+      {
+        "id": 1,
+        "idItem": "2434",
+        "quantidadeItem": 2,
+        "valorItem": 5000
+      },
+      {
+        "id": 2,
+        "idItem": "2435",
+        "quantidadeItem": 1,
+        "valorItem": 5000
+      }
+    ],
+    "criadoEm": "2024-11-30T10:00:00.000Z",
+    "atualizadoEm": "2024-11-30T10:00:00.000Z"
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X POST http://localhost:3000/order \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "numeroPedido": "v10089015vdb-01",
+    "valorTotal": 10000,
+    "dataCriacao": "2023-07-19T12:24:11.529Z",
+    "items": [
+      {
+        "idItem": "2434",
+        "quantidadeItem": 2,
+        "valorItem": 5000
+      }
+    ]
+  }'
+```
+
+**Swagger** (após autenticar):
+1. Expanda `POST /order`
+2. "Try it out"
+3. Edite o JSON
+4. "Execute"
+
+**Postman**:
+1. POST `http://localhost:3000/order`
+2. Authorization: Bearer Token (com seu token)
+3. Body (raw JSON): Cole o JSON
+4. Send
+
+---
+
+#### 5. Listar Todos os Pedidos
+
+**Endpoint**: `GET /order/list`
+
+**Descrição**: Retorna todos os pedidos cadastrados no sistema com seus itens.
+
+**Headers**:
+```
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+**Resposta de Sucesso (200)**:
+```json
+{
+  "success": true,
+  "message": "5 pedido(s) encontrado(s)",
+  "data": [
+    {
+      "id": 1,
+      "numeroPedido": "v10089015vdb-01",
+      "valorTotal": 10000,
+      "dataCriacao": "2023-07-19T12:24:11.529Z",
+      "items": [
+        {
+          "id": 1,
+          "idItem": "2434",
+          "quantidadeItem": 2,
+          "valorItem": 5000
+        }
+      ],
+      "criadoEm": "2024-11-30T10:00:00.000Z",
+      "atualizadoEm": "2024-11-30T10:00:00.000Z"
+    }
+  ]
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X GET http://localhost:3000/order/list \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+```
+
+**Swagger**:
+1. Expanda `GET /order/list`
+2. "Try it out" → "Execute"
+
+**Postman**:
+1. GET `http://localhost:3000/order/list`
+2. Authorization: Bearer Token
+3. Send
+
+---
+
+#### 6. Buscar Pedido Específico
+
+**Endpoint**: `GET /order/:orderId`
+
+**Descrição**: Retorna os detalhes de um pedido específico pelo seu número.
+
+**Headers**:
+```
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+**Parâmetros de URL**:
+- `orderId`: Número do pedido (ex: v10089015vdb-01)
+
+**Resposta de Sucesso (200)**:
+```json
+{
+  "success": true,
+  "message": "Pedido encontrado",
+  "data": {
+    "id": 1,
+    "numeroPedido": "v10089015vdb-01",
+    "valorTotal": 10000,
+    "dataCriacao": "2023-07-19T12:24:11.529Z",
+    "items": [
+      {
+        "id": 1,
+        "idItem": "2434",
+        "quantidadeItem": 2,
+        "valorItem": 5000
+      }
+    ],
+    "criadoEm": "2024-11-30T10:00:00.000Z",
+    "atualizadoEm": "2024-11-30T10:00:00.000Z"
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X GET http://localhost:3000/order/v10089015vdb-01 \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+```
+
+**Swagger**:
+1. Expanda `GET /order/{orderId}`
+2. "Try it out"
+3. Digite o número do pedido em `orderId`
+4. "Execute"
+
+**Postman**:
+1. GET `http://localhost:3000/order/v10089015vdb-01`
+2. Authorization: Bearer Token
+3. Send
+
+---
+
+#### 7. Atualizar Pedido
+
+**Endpoint**: `PUT /order/:orderId`
+
+**Descrição**: Atualiza os dados de um pedido existente, incluindo seus itens.
+
+**Headers**:
+```
+Authorization: Bearer SEU_TOKEN_AQUI
+Content-Type: application/json
+```
+
+**Parâmetros de URL**:
+- `orderId`: Número do pedido a ser atualizado
+
+**Body (JSON)**:
+```json
+{
+  "numeroPedido": "v10089015vdb-01",
+  "valorTotal": 15000,
+  "dataCriacao": "2023-07-19T12:24:11.529Z",
+  "items": [
+    {
+      "idItem": "2434",
+      "quantidadeItem": 3,
+      "valorItem": 5000
+    }
+  ]
+}
+```
+
+**Resposta de Sucesso (200)**:
+```json
+{
+  "success": true,
+  "message": "Pedido atualizado com sucesso",
+  "data": {
+    "id": 1,
+    "numeroPedido": "v10089015vdb-01",
+    "valorTotal": 15000,
+    "dataCriacao": "2023-07-19T12:24:11.529Z",
+    "items": [
+      {
+        "id": 3,
+        "idItem": "2434",
+        "quantidadeItem": 3,
+        "valorItem": 5000
+      }
+    ],
+    "criadoEm": "2024-11-30T10:00:00.000Z",
+    "atualizadoEm": "2024-11-30T10:05:00.000Z"
+  }
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X PUT http://localhost:3000/order/v10089015vdb-01 \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "numeroPedido": "v10089015vdb-01",
+    "valorTotal": 15000,
+    "dataCriacao": "2023-07-19T12:24:11.529Z",
+    "items": [
+      {
+        "idItem": "2434",
+        "quantidadeItem": 3,
+        "valorItem": 5000
+      }
+    ]
+  }'
+```
+
+**Swagger**:
+1. Expanda `PUT /order/{orderId}`
+2. "Try it out"
+3. Digite o `orderId`
+4. Edite o JSON
+5. "Execute"
+
+**Postman**:
+1. PUT `http://localhost:3000/order/v10089015vdb-01`
+2. Authorization: Bearer Token
+3. Body (raw JSON): Cole o JSON
+4. Send
+
+---
+
+#### 8. Deletar Pedido
+
+**Endpoint**: `DELETE /order/:orderId`
+
+**Descrição**: Remove permanentemente um pedido e todos os seus itens do sistema.
+
+**Headers**:
+```
+Authorization: Bearer SEU_TOKEN_AQUI
+```
+
+**Parâmetros de URL**:
+- `orderId`: Número do pedido a ser deletado
+
+**Resposta de Sucesso (200)**:
+```json
+{
+  "success": true,
+  "message": "Pedido v10089015vdb-01 deletado com sucesso"
+}
+```
+
+**Como Testar**:
+
+**cURL**:
+```bash
+curl -X DELETE http://localhost:3000/order/v10089015vdb-01 \
+  -H "Authorization: Bearer SEU_TOKEN_AQUI"
+```
+
+**Swagger**:
+1. Expanda `DELETE /order/{orderId}`
+2. "Try it out"
+3. Digite o `orderId`
+4. "Execute"
+
+**Postman**:
+1. DELETE `http://localhost:3000/order/v10089015vdb-01`
+2. Authorization: Bearer Token
+3. Send
+
+---
+
+##  Descrição das Funcionalidades
+
+###  Sistema de Autenticação
+
+**Registro de Usuário** (`POST /auth/register`)
+- Cria uma nova conta de usuário no sistema
+- Valida formato de email e força mínima da senha
+- Criptografa a senha usando bcrypt (hash seguro)
+- Retorna automaticamente um token JWT para uso imediato
+- Previne emails duplicados no banco de dados
+
+**Login** (`POST /auth/login`)
+- Autentica usuário com email e senha
+- Compara senha fornecida com hash armazenado
+- Gera token JWT válido por 24 horas
+- Token contém ID e email do usuário
+- Retorna dados do usuário junto com o token
+
+**Perfil do Usuário** (`GET /auth/me`)
+- Retorna informações do usuário autenticado
+- Valida token JWT antes de retornar dados
+- Busca dados atualizados do banco de dados
+- Não expõe informações sensíveis (senha)
+
+###  Gerenciamento de Pedidos
+
+**Criar Pedido** (`POST /order`)
+- Cria novo pedido com múltiplos itens
+- Valida todos os campos obrigatórios
+- Usa transação de banco para garantir consistência
+- Previne duplicação de número de pedido
+- Retorna pedido completo com IDs gerados
+
+**Listar Pedidos** (`GET /order/list`)
+- Retorna todos os pedidos do sistema
+- Inclui todos os itens de cada pedido
+- Ordenados por data de criação (mais recentes primeiro)
+- Retorna contador total de pedidos
+- Formato otimizado para exibição em listas
+
+**Buscar Pedido** (`GET /order/:orderId`)
+- Localiza pedido específico pelo número
+- Retorna detalhes completos do pedido
+- Inclui todos os itens associados
+- Retorna erro 404 se não encontrado
+- Útil para detalhamento e impressão
+
+**Atualizar Pedido** (`PUT /order/:orderId`)
+- Atualiza dados de um pedido existente
+- Substitui completamente os itens anteriores
+- Usa transação para garantir atomicidade
+- Valida existência do pedido antes de atualizar
+- Atualiza timestamp de modificação automaticamente
+
+**Deletar Pedido** (`DELETE /order/:orderId`)
+- Remove pedido e todos os seus itens
+- Usa CASCADE para deletar itens relacionados
+- Operação irreversível
+- Retorna confirmação de exclusão
+- Útil para cancelamentos e limpezas
+
+###  Segurança e Validação
+
+**Middleware de Autenticação**
+- Valida formato do token (Bearer)
+- Verifica assinatura e expiração do JWT
+- Adiciona dados do usuário à requisição
+- Bloqueia acesso não autorizado
+- Retorna erros claros e específicos
+
+**Validação de Dados**
+- Valida tipos de dados em todas as entradas
+- Verifica campos obrigatórios
+- Valida formatos (email, datas, números)
+- Previne SQL injection com queries parametrizadas
+- Sanitiza dados antes de salvar no banco
+
+**Tratamento de Erros**
+- Captura e trata todos os erros da aplicação
+- Retorna mensagens descritivas ao cliente
+- Oculta detalhes internos em produção
+- Registra erros em logs para debug
+- Retorna status HTTP apropriados
+
+###  Documentação Swagger
+
+**Interface Interativa**
+- Documenta todos os endpoints da API
+- Permite testar requisições direto no navegador
+- Mostra exemplos de request e response
+- Valida dados antes de enviar
+- Suporta autenticação JWT integrada
+
+**Esquemas de Dados**
+- Define estrutura de todos os objetos
+- Documenta campos obrigatórios e opcionais
+- Especifica tipos e formatos de dados
+- Fornece exemplos realistas
+- Facilita integração com outras aplicações
+
+###  Banco de Dados
+
+**PostgreSQL**
+- Banco relacional robusto e confiável
+- Transações ACID para consistência
+- Índices para otimização de buscas
+- Constraints para integridade de dados
+- Timestamps automáticos de criação/atualização
+
+**Pool de Conexões**
+- Gerencia múltiplas conexões simultâneas
+- Reutiliza conexões para performance
+- Reconecta automaticamente em caso de falha
+- Configurado para ambiente de produção
+- Suporta SSL para segurança
+
+---
+
+##  Testes
+
+```bash
+# Executar todos os testes
+npm test
+
+# Executar testes em modo watch
+npm run test:watch
+
+# Gerar relatório de cobertura
+npm run test:coverage
+
+# Testes verbosos (mais detalhes)
+npm run test:verbose
+```
+
+---
+
+
+
+##  Variáveis de Ambiente
+
+```env
+# Banco de Dados
+DATABASE_URL=postgresql://usuario:senha@host/database
+
+# Servidor
+PORT=3000
+NODE_ENV=development
+
+# JWT
+JWT_SECRET=sua_chave_secreta_forte_aqui
+```
+
+---
+
+
+
+##  Contribuindo
+
+Contribuições são bem-vindas! Por favor:
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/NovaFeature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona NovaFeature'`)
+4. Push para a branch (`git push origin feature/NovaFeature`)
+5. Abra um Pull Request
+
+---
+
+
+
+##  Autor
+
+**Everton Eduardo**
+
+- GitHub: [@evertonProgramadorCriativo](https://github.com/evertonProgramadorCriativo)
+- LinkedIn: [Seu LinkedIn](https://www.linkedin.com/in/evertoneduardodesenvolvedor/)
+- Projeto Online: [Veja o Site Online](https://processo-seletivo-jitterbit.onrender.com/)
+
+---
+
+##  Agradecimentos
+
+- Jitterbit pelo desafio técnico
+- Comunidade Node.js
+- Documentação do Express.js
+- Render.com pelo hosting gratuito
+
+---
+
+**Se este projeto foi útil, considere dar uma estrela!**
+
 Primeiro Teste do Servido com Deploy do render.com
 
-npm run test
-
-> pedidos-api@1.0.0 test
-> node config/database.js
-
-Conectado ao PostgreSQL (Render.com)
-Teste de conexão bem-sucedido!
-Hora do servidor: 2025-11-30T02:48:18.914Z
+**npm run test**
 
 Segundo Teste Criar as Tabelas (Pedidos e Itens).
 
 
- npm run create-tables
-
-> pedidos-api@1.0.0 create-tables
-> node config/createTables.js    
-
-Iniciando criação das tabelas...
-
-Conectado ao PostgreSQL (Render.com)
-Tabela "pedidos" criada com sucesso!
-Tabela "itens_pedido" criada com sucesso!
-Índices criados com sucesso!
+ **npm run create-tables**
 
   Tabelas existentes no banco:
    - itens_pedido
    - pedidos
 
- Todas as tabelas foram criadas com sucesso!
 
 Outros Comandos 
 
 Criar tabelas
-npm run create-tables
+**npm run create-tables**
 
  Deletar todas as tabelas
-npm run delete-tables
+
+**npm run delete-tables**
 
 Resetar banco (deletar e criar novamente)
-npm run reset-db
+
+**npm run reset-db**
 
 ### Entrando no Banco de dados
 psql -h localhost -U seu_usuario -d seu_banco -c "\dt"
@@ -67,7 +1132,8 @@ SELECT * FROM itens_pedido LIMIT 5;
 PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node utils/mapper.js
 Testando funções do Mapper...
 
-Teste 1: Mapeamento de pedido válido
+### Mapeamento de pedido válido
+
 Mapeamento bem-sucedido!
 ```
 Pedido de entrada:
