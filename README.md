@@ -32,11 +32,31 @@ Tabela "itens_pedido" criada com sucesso!
 
 Outros Comandos 
 
- # Criar tabelas
+Criar tabelas
 npm run create-tables
 
-# Deletar todas as tabelas
+ Deletar todas as tabelas
 npm run delete-tables
 
-# Resetar banco (deletar e criar novamente)
+Resetar banco (deletar e criar novamente)
 npm run reset-db
+
+### Entrando no Banco de dados
+psql -h localhost -U seu_usuario -d seu_banco -c "\dt"
+
+#### -- Listar tabelas
+\dt
+
+#### -- Listar todas as tabelas com detalhes
+\dt+
+
+#### -- Ver estrutura das tabelas
+\d pedidos
+\d itens_pedido
+
+#### -- Consultar dados
+SELECT * FROM pedidos LIMIT 5;
+SELECT * FROM itens_pedido LIMIT 5;
+
+#### -- Sair
+\q

@@ -1,7 +1,7 @@
 const { pool } = require('./database');
 
 /**
- * Criando as tabelas necessárias no banco de dados
+ * Criando as tabelas no banco de dados
  * 
  * Estrutura:
  * - Tabela: pedidos (orders)
