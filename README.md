@@ -62,7 +62,7 @@ SELECT * FROM itens_pedido LIMIT 5;
 \q
 
 
-##  O Mapper vai transformar o JSON que recebemos da API para o formato que será salvo no banco de dados
+## 3  O Mapper vai transformar o JSON que recebemos da API para o formato que será salvo no banco de dados
 
 PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node utils/mapper.js
 Testando funções do Mapper...
@@ -135,3 +135,59 @@ Mapeamento banco → API bem-sucedido!
  Testes passaram com sucesso!
 
 
+## 4- Middleware de Tratamento de Erros
+
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node middlewares/errorHandler.js    
+Testando funções do Error Handler...
+
+Teste 1: Criar AppError customizado       
+AppError criado:
+--+- Mensagem: Teste de erro
+--+-  Status Code: 400
+---+-  Is Operational: true
+OK ---+-  AppError funcionando
+
+Teste 2: Função validationError
+Erro de validação criado:
+---+-  Mensagem: Campo obrigatório ausente
+--+-  Status Code: 400
+OK ---+-  validationError funcionando
+
+Teste 3: Função notFoundError
+Erro not found criado:
+---+-  Mensagem: Pedido não encontrado
+---+-  Status Code: 404
+OK --+-  notFoundError funcionando
+
+Teste 4: Função conflictError
+Erro de conflito criado:
+--+-  Mensagem: Pedido já existe
+---+-  Status Code: 409
+OK ---+-  conflictError funcionando
+
+Teste 5: Simular errorHandler
+--- Erro Capturado Pelo Error Handler
+Status: 400
+Mensagem: Erro de teste
+Stack: Error: Erro de teste
+    at Object.<anonymous> (C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src\middlewares\errorHandler.js:189:18)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:220:24)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:170:5)
+    at node:internal/main/run_main_module:36:49
+Status HTTP: 400
+Resposta JSON:
+{
+  "success": false,
+  "error": {
+    "message": "Erro de teste",
+    "statusCode": 400
+  }
+}
+OK ---+-  errorHandler funcionando
+
+Testes do Error Handler concluídos!
