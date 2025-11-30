@@ -317,3 +317,67 @@ Testes concluídos com sucesso!
 Pedido de teste: v10089017vdb-buscar-1764512099573
 
 
+## 7 Listar Todos os Pedidos
+
+PS C:\Users\ogum\Documents\projetos-postefolio\projeto-pedidos-api\src> node tests/testListarPedidos.js
+Testando listar todos os pedidos
+
+Criando pedidos de teste...
+Conectado ao PostgreSQL (Render.com)
+Pedido inserido com ID: 3
+Item inserido com ID: 5
+Transação confirmada com sucesso
+OK - Pedido 1 criado: v10089018vdb-list-1-1764512749652
+Pedido inserido com ID: 4
+Item inserido com ID: 6
+Item inserido com ID: 7
+Transação confirmada com sucesso
+OK - Pedido 2 criado: v10089019vdb-list-2-1764512749653
+Teste: Listando todos os pedidos do banco...
+OK - Total de pedidos encontrados: 4
+Listagem dos pedidos:
+============================================================
+
+Pedido 1:
+  Order ID: v10089019vdb-list-2-1764512749653
+  Valor Total: 7500.00
+  Data Criação: 2025-11-30T17:25:49.653Z
+  Criado em: 2025-11-30T17:25:52.632Z
+  Quantidade de itens: 2
+  Itens:
+    1. ID: 3002 | Qtd: 2 | Valor: 3000.00
+    2. ID: 3003 | Qtd: 1 | Valor: 1500.00
+
+Pedido 2:
+  Order ID: v10089018vdb-list-1-1764512749652
+  Valor Total: 5000.00
+  Data Criação: 2025-11-30T17:25:49.652Z
+  Criado em: 2025-11-30T17:25:51.900Z
+  Quantidade de itens: 1
+  Itens:
+    1. ID: 3001 | Qtd: 1 | Valor: 5000.00
+
+Pedido 3:
+  Order ID: v10089017vdb-buscar-1764512099573
+  Valor Total: 8500.00
+  Data Criação: 2025-11-30T17:14:59.573Z
+  Criado em: 2025-11-30T17:15:01.819Z
+  Quantidade de itens: 2
+  Itens:
+    1. ID: 1001 | Qtd: 3 | Valor: 2500.00
+    2. ID: 1002 | Qtd: 1 | Valor: 1000.00
+
+Pedido 4:
+  Order ID: v10089016vdb-test-1764510460809
+  Valor Total: 15000.00
+  Data Criação: 2025-11-30T16:47:40.809Z
+  Criado em: 2025-11-30T16:47:42.947Z
+  Quantidade de itens: 2
+  Itens:
+    1. ID: 2434 | Qtd: 2 | Valor: 5000.00
+    2. ID: 2435 | Qtd: 1 | Valor: 5000.00
+
+============================================================
+
+
+Teste finalizado com sucesso!
